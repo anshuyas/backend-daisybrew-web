@@ -10,3 +10,6 @@ export const loginUserDto = z.object({
   email: z.string().email(),
   password: z.string().min(6)
 });
+
+export type CreateUserDTO = z.infer<typeof registerUserDto>;
+export type LoginUserDTO = z.infer<typeof loginUserDto>;

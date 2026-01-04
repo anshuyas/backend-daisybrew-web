@@ -1,47 +1,52 @@
-import { CreateUserDto, LoginUserDto } from "../dtos/user.dto";
 import { UserRepository } from "../repositories/user.repository";
 import bcryptjs from "bcryptjs";
 import { HttpError } from "../errors/http-error";
 import jwt from "jsonwebtoken";
-import { JWT_SECRET } from "../config/index";
+import { JWT_SECRET } from "../config";
+import { CreateUserDTO, LoginUserDTO } from "../dtos/user.dto";
 
-let userRepository = new UserRepository();
+const userRepository = new UserRepository();
 
 export class UserService {
-    async registerUser(data: CreateUserDto) {
-        // Business logic, check duplicate username/email, hash
-        const checkEmail = await userRepository.getUserByEmail(data.email);
-        if (checkEmail) {
-            throw new HttpError(403, "Email already in use");
-        }
-        const checkUsername = await userRepository.getUserByUsername(data.username);
-        if (checkUsername) {
-            throw new HttpError(403, "Username already in use");
-        }
-        // hash/encrypt password, to not store plain text password - security risk
-        const hashedPassword = await bcryptjs.hash(data.password, 10); // 10 - complexity
-        data.password = hashedPassword; // update the password with hashed one
-        const newUser = await userRepository.createUser(data);
+  async createUser(data: CreateUserDTO) {
+    const existingUser = await userRepository.findUserByEmail(data.email);
+    if (existingUser) {
+      throw new HttpError(403, "Email already in use");
+    }
 
-        return newUser;
+    const hashedPassword = await bcryptjs.hash(data.password, 10);
+
+    const newUser = await userRepository.createUser({
+      email: data.email,
+      password: hashedPassword,
+      role: data.role,
+    });
+
+    return {
+      id: newUser._id,
+      email: newUser.email,
+      role: newUser.role,
+      message: "User registered successfully",
+    };
+  }
+
+  async loginUser(data: LoginUserDTO) {
+    const user = await userRepository.findUserByEmail(data.email);
+    if (!user) {
+      throw new HttpError(404, "User not found");
     }
-    async loginUser(data: LoginUserDto) {
-        const existingUser = await userRepository.getUserByUsername(data.username);
-        if (!existingUser) {
-            throw new HttpError(404, "User not found");
-        }
-        const isPasswordValid = await bcryptjs.compare(data.password, existingUser.password);// compare plain text with hashed
-        if (!isPasswordValid) {
-            throw new HttpError(401, "Invalid credentials");
-        }
-        // generate JWT
-        const payload = { 
-            id: existingUser._id,
-            username: existingUser.username,
-            email: existingUser.email,
-            role: existingUser.role
-        }; // what to include in token
-        const token = jwt.sign(payload, JWT_SECRET, { expiresIn: '30d' }); // 30 days expiry
-        return { token, existingUser }
+
+    const isValidPassword = await bcryptjs.compare(data.password, user.password);
+    if (!isValidPassword) {
+      throw new HttpError(401, "Invalid credentials");
     }
+
+    const payload = { id: user._id, email: user.email, role: user.role };
+    const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "30d" });
+
+    return {
+      token,
+      user: { id: user._id, email: user.email, role: user.role },
+    };
+  }
 }
