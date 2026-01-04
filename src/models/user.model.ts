@@ -1,21 +1,15 @@
-import mongoose, { Document, Schema } from "mongoose";
-import { UserType } from "../types/user.type";
+import mongoose, { Schema, Document } from 'mongoose';
 
-const UserSchema: Schema = new Schema({
-    username: { type: String, required: true, minlength: 3 },
-    email: { type: String, required: true, unique: true },
-    password: { type: String, required: true, minlength: 6 },
-    firstName: { type: String },
-    lastName: { type: String },
-    role: { type: String, enum: ['admin', 'user'], default: 'user' },
-}, {
-    timestamps: true, // createdAt and updatedAt (auto fields)
-});
-
-export interface IUser extends UserType, Document { // mongodb related fields
-    _id: mongoose.Types.ObjectId;
-    createdAt: Date;
-    updatedAt: Date;
+export interface IUser extends Document {
+  email: string;
+  password: string;
+  role: 'user' | 'admin';
 }
 
-export const UserModel = mongoose.model<IUser>('User', UserSchema);
+const userSchema = new Schema<IUser>({
+  email: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+  role: { type: String, enum: ['user', 'admin'], default: 'user' },
+}, { timestamps: true });
+
+export const UserModel = mongoose.model<IUser>('User', userSchema);
