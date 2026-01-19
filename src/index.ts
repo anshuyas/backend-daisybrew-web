@@ -1,9 +1,21 @@
 import express from "express";
+import cors from "cors";
 import { connectDatabase } from "./database/mongodb";
 import authRoutes from "./routes/auth.route";
 
 const app = express();
+
+app.use(cors({
+  origin: "http://localhost:3000",
+  credentials: true,
+}));
+
 app.use(express.json());
+
+app.use((req, res, next) => {
+  console.log(`[${req.method}] ${req.url}`, req.body);
+  next();
+});
 
 app.get("/", (req, res) => {
   res.send("Server is running");
