@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import { connectDatabase } from "./database/mongodb";
 import authRoutes from "./routes/auth.route";
+import adminUserRoutes from "./routes/admin/user.route"; 
 
 const app = express();
 
@@ -11,6 +12,8 @@ app.use(cors({
 }));
 
 app.use(express.json());
+
+app.use("/api/admin/users", adminUserRoutes);
 
 app.use((req, res, next) => {
   console.log(`[${req.method}] ${req.url}`, req.body);
