@@ -38,40 +38,41 @@ export const createUser = async (req: any, res: Response) => {
   }
 };
 
-// GET ALL USERS WITH PAGINATION
+// GET ALL USERS WITH PAGINATION + SEARCH
 export const getAllUsers = async (req: any, res: Response) => {
   try {
-    let { page = 1, limit = 10, search = "" } = req.query;
+    let { page = "1", limit = "10", search = "" } = req.query;
 
-    page = Math.max(parseInt(page, 10), 1);
-    limit = Math.max(parseInt(limit, 10), 1);
+    const pageNumber = Math.max(parseInt(page, 10), 1);
+    const limitNumber = Math.max(parseInt(limit, 10), 1);
 
     const query: any = {};
 
-    // Optional search by email
+    // Search by email
     if (search) {
       query.email = { $regex: search, $options: "i" };
     }
 
     const totalUsers = await UserModel.countDocuments(query);
-    const totalPages = Math.ceil(totalUsers / limit);
+    const totalPages = Math.ceil(totalUsers / limitNumber);
 
     const users = await UserModel.find(query)
-      .skip((page - 1) * limit)
-      .limit(limit)
       .select("-password")
+      .skip((pageNumber - 1) * limitNumber)
+      .limit(limitNumber)
       .sort({ createdAt: -1 });
 
     res.status(200).json({
       users,
       pagination: {
-        page,
-        limit,
+        page: pageNumber,
+        limit: limitNumber,
         totalUsers,
         totalPages,
       },
     });
   } catch (error) {
+    console.error("Get users error:", error);
     res.status(500).json({ message: "Server error" });
   }
 };
