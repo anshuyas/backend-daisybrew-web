@@ -9,8 +9,8 @@ export class AuthController {
   async register(req: Request, res: Response) {
     try {
       const data = registerUserDto.parse(req.body);
-      const user = await userService.createUser(data); // Fixed here
-      res.status(201).json(user); // Already includes message
+      const user = await userService.createUser(data); 
+      res.status(201).json(user); 
     } catch (err: any) {
       res.status(err.statusCode || 400).json({ error: err.message });
     }
@@ -19,8 +19,8 @@ export class AuthController {
   async login(req: Request, res: Response) {
     try {
       const data = loginUserDto.parse(req.body);
-      const result = await userService.loginUser(data); // Fixed here
-      res.status(200).json(result); // Already includes token & user
+      const result = await userService.loginUser(data); 
+      res.status(200).json(result); 
     } catch (err: any) {
       res.status(err.statusCode || 400).json({ error: err.message });
     }
@@ -36,15 +36,11 @@ export class AuthController {
 
       const resetToken = crypto.randomBytes(32).toString('hex');
 
-      const hashedToken = crypto
-        .createHash("sha256")
-        .update(resetToken)
-        .digest("hex");
-
       await userService.setResetPasswordToken(email, resetToken);
 
       res.status(200).json({
         message: 'Password reset link has been sent to your email',
+        resetToken,
       });
     } catch (err: any) {
       res.status(err.statusCode || 400).json({ error: err.message });
