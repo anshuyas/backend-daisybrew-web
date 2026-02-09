@@ -49,4 +49,17 @@ export class UserService {
       user: { id: user._id, email: user.email, role: user.role },
     };
   }
+
+  async setResetPasswordToken(email: string, token: string) {
+  const user = await userRepository.findUserByEmail(email);
+
+  if (!user) {
+    return;
+  }
+
+  user.resetPasswordToken = token;
+  user.resetPasswordExpires = new Date(Date.now() + 15 * 60 * 1000); // 15 minutes
+
+  await user.save();
+}
 }

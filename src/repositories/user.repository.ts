@@ -1,6 +1,9 @@
 import { IUser, UserModel } from "../models/user.model";
 
 export class UserRepository {
+  getUserById(id: any) {
+      throw new Error('Method not implemented.');
+  }
   
   async createUser(user: Partial<IUser>) {
     return UserModel.create(user);
@@ -9,4 +12,5 @@ export class UserRepository {
   async findUserByEmail(email: string) {
     return UserModel.findOne({ email }).select('+password'); // always select password
   }
+  
 }

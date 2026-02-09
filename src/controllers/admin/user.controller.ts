@@ -41,8 +41,25 @@ export const createUser = async (req: any, res: Response) => {
 // GET ALL USERS
 export const getAllUsers = async (req: any, res: Response) => {
   try {
-    const users = await UserModel.find().select("-password");
-    res.json(users);
+    let { page = 1, limit = 10 } = req.query;
+    page = parseInt(page, 10);
+    limit = parseInt(limit, 10);
+
+    const totalUsers = await UserModel.countDocuments();
+    const totalPages = Math.ceil(totalUsers / limit);
+
+    const users = await UserModel.find()
+      .skip((page - 1) * limit)
+      .limit(limit)
+      .select("-password");
+
+    res.json({
+      success: true,
+      data: users,
+      page,
+      totalPages,
+      totalUsers,
+    });
   } catch (error) {
     res.status(500).json({ message: "Server error" });
   }
