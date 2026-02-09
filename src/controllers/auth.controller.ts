@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import crypto from 'crypto';
 import { UserService } from '../services/user.service';
 import { registerUserDto, loginUserDto } from '../dtos/user.dto';
+import { sendEmail } from '../config/email';
 
 const userService = new UserService();
 
@@ -37,6 +38,19 @@ export class AuthController {
       const resetToken = crypto.randomBytes(32).toString('hex');
 
       await userService.setResetPasswordToken(email, resetToken);
+
+      const resetLink = `${process.env.CLIENT_URL}/reset-password?token=${resetToken}`;
+
+      await sendEmail(
+        email,
+        "Reset your password",
+        `
+          <p>You requested a password reset.</p>
+          <p>Click the link below to reset your password:</p>
+          <a href="${resetLink}">${resetLink}</a>
+          <p>This link will expire in 15 minutes.</p>
+        `
+      );
 
       res.status(200).json({
         message: 'Password reset link has been sent to your email',
