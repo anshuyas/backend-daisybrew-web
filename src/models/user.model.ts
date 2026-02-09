@@ -15,8 +15,9 @@ const userSchema = new Schema<IUser>({
   role: { type: String, enum: ['user', 'admin'], default: 'user' },
   image: { type: String },
 
-  resetPasswordToken: { type: String },
+  resetPasswordToken: { type: String, select: false },
   resetPasswordExpires: { type: Date },
+
 }, 
 { timestamps: true });
 

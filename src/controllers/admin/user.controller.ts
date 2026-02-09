@@ -38,27 +38,38 @@ export const createUser = async (req: any, res: Response) => {
   }
 };
 
-// GET ALL USERS
+// GET ALL USERS WITH PAGINATION
 export const getAllUsers = async (req: any, res: Response) => {
   try {
-    let { page = 1, limit = 10 } = req.query;
-    page = parseInt(page, 10);
-    limit = parseInt(limit, 10);
+    let { page = 1, limit = 10, search = "" } = req.query;
 
-    const totalUsers = await UserModel.countDocuments();
+    page = Math.max(parseInt(page, 10), 1);
+    limit = Math.max(parseInt(limit, 10), 1);
+
+    const query: any = {};
+
+    // Optional search by email
+    if (search) {
+      query.email = { $regex: search, $options: "i" };
+    }
+
+    const totalUsers = await UserModel.countDocuments(query);
     const totalPages = Math.ceil(totalUsers / limit);
 
-    const users = await UserModel.find()
+    const users = await UserModel.find(query)
       .skip((page - 1) * limit)
       .limit(limit)
-      .select("-password");
+      .select("-password")
+      .sort({ createdAt: -1 });
 
-    res.json({
-      success: true,
-      data: users,
-      page,
-      totalPages,
-      totalUsers,
+    res.status(200).json({
+      users,
+      pagination: {
+        page,
+        limit,
+        totalUsers,
+        totalPages,
+      },
     });
   } catch (error) {
     res.status(500).json({ message: "Server error" });

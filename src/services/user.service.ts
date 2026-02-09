@@ -3,7 +3,9 @@ import bcryptjs from "bcryptjs";
 import { HttpError } from "../errors/http-error";
 import jwt from "jsonwebtoken";
 import { JWT_SECRET } from "../config";
+import crypto from "crypto";
 import { CreateUserDTO, LoginUserDTO } from "../dtos/user.dto";
+import { UserModel } from "../models/user.model";
 
 const userRepository = new UserRepository();
 
@@ -64,17 +66,23 @@ export class UserService {
 }
 
 async resetPassword(token: string, newPassword: string) {
-  const user = await userRepository.findByResetPasswordToken(token);
+  const hashedToken = crypto
+      .createHash("sha256")
+      .update(token)
+      .digest("hex");
+
+const user = await UserModel.findOne({
+      resetPasswordToken: hashedToken,
+      resetPasswordExpires: { $gt: new Date() },
+    }).select("+password");
 
   if (!user) {
     throw new HttpError(400, "Invalid or expired reset token");
   }
 
-  const hashedPassword = await bcryptjs.hash(newPassword, 10);
-
-  user.password = hashedPassword;
-  user.resetPasswordToken = undefined;
-  user.resetPasswordExpires = undefined;
+    user.password = await bcryptjs.hash(newPassword, 10);
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpires = undefined;
 
   await user.save();
 }
