@@ -13,4 +13,10 @@ export class UserRepository {
     return UserModel.findOne({ email }).select('+password'); // always select password
   }
   
+  async findByResetPasswordToken(token: string) {
+  return UserModel.findOne({
+    resetPasswordToken: token,
+    resetPasswordExpires: { $gt: new Date() },
+  }).select('+password');
+}
 }

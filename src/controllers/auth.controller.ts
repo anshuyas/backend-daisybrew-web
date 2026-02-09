@@ -45,4 +45,24 @@ export class AuthController {
       res.status(err.statusCode || 400).json({ error: err.message });
     }
   }
+
+  async resetPassword(req: Request, res: Response) {
+  try {
+    const { token, password } = req.body;
+
+    if (!token || !password) {
+      return res.status(400).json({
+        error: 'Token and new password are required',
+      });
+    }
+
+    await userService.resetPassword(token, password);
+
+    res.status(200).json({
+      message: 'Password has been reset successfully',
+    });
+  } catch (err: any) {
+    res.status(err.statusCode || 400).json({ error: err.message });
+  }
+}
 }
