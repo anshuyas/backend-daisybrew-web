@@ -1,6 +1,7 @@
 import express from "express";
 import { OrderModel } from "../models/order.model";
 import { authorized } from "../middlewares/auth.middleware";
+import NotificationModel from "../models/notification.model";
 
 const router = express.Router();
 
@@ -33,9 +34,13 @@ router.post("/", authorized, async (req: any, res) => {
       customerDetails,
     });
 
+    await NotificationModel.create({
+      user: req.user._id,
+      message: `Your order #${order._id.toString().slice(-6)} is confirmed`,
+    });
+
     res.status(201).json(order);
   } catch (error: any) {
-    console.error("Create order error:", error);
     res.status(500).json({ message: error.message || "Failed to create order" });
   }
 });
