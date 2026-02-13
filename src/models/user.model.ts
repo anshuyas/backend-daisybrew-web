@@ -1,6 +1,8 @@
 import mongoose, { Schema, Document } from 'mongoose';
+import { required } from 'zod/v4/core/util.cjs';
 
 export interface IUser extends Document {
+  fullName: string;
   email: string;
   password: string;
   role: 'user' | 'admin';
@@ -10,6 +12,7 @@ export interface IUser extends Document {
 }
 
 const userSchema = new Schema<IUser>({
+  fullName: {type: String, required: true},
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true, select: false },
   role: { type: String, enum: ['user', 'admin'], default: 'user' },
