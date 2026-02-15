@@ -5,6 +5,9 @@ import adminUserRoutes from "./routes/admin/user.route";
 import userRoutes from "./routes/user.route";
 import orderRoutes from "./routes/order.route";
 import notificationRoutes from "./routes/notification.route";
+import adminMenuRoutes from "./routes/admin/menu.route";
+import menuRoutes from "./routes/menu.route";
+import path from "path";
 
 const app = express();
 
@@ -19,11 +22,14 @@ app.use(
 app.use(express.json());
 
 /* Routes */
+app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 app.use("/api/auth", authRoutes);
 app.use("/api/admin/users", adminUserRoutes);
+app.use("/api/admin/menu", adminMenuRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/notifications", notificationRoutes);
+app.use("/api/menu", menuRoutes);
 
 app.get("/", (req, res) => {
   res.send("Server is running");
