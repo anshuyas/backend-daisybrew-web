@@ -15,6 +15,7 @@ router.get("/", authorized, async (req: any, res) => {
   } catch (err) {
     res.status(500).json({ message: "Failed to fetch notifications" });
   }
+  console.log("Fetching notifications for:", req.user._id);
 });
 
 // Mark as read

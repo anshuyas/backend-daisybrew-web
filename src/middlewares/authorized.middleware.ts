@@ -9,13 +9,14 @@ export interface AuthRequest extends Request {
 
 export const authorized = async (req: AuthRequest, res: Response, next: NextFunction) => {
   try {
+    let token: string | undefined;
     const authHeader = req.headers.authorization;
 
-    if (!authHeader || !authHeader.startsWith("Bearer ")) {
-      return res.status(401).json({ message: "Not authorized, no token" });
+     if (authHeader && authHeader.startsWith("Bearer ")) {
+      token = authHeader.split(" ")[1];
+    } else if (req.cookies?.auth_token) {
+      token = req.cookies.auth_token;
     }
-
-    const token = authHeader.split(" ")[1];
 
     if (!token) {
       return res.status(401).json({ message: "Not authorized, token missing" });
