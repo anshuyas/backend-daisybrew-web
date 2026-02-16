@@ -7,6 +7,7 @@ import orderRoutes from "./routes/order.route";
 import notificationRoutes from "./routes/notification.route";
 import adminMenuRoutes from "./routes/admin/menu.route";
 import menuRoutes from "./routes/menu.route";
+import reportsRoute from "./routes/admin/reports.route";
 import path from "path";
 
 const app = express();
@@ -26,6 +27,7 @@ app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 app.use("/api/auth", authRoutes);
 app.use("/api/admin/users", adminUserRoutes);
 app.use("/api/admin/menu", adminMenuRoutes);
+app.use("/api/admin/reports", reportsRoute);
 app.use("/api/user", userRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/notifications", notificationRoutes);
