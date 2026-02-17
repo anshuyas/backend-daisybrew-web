@@ -5,10 +5,10 @@ import bcrypt from "bcryptjs";
 // CREATE USER (Admin)
 export const createUser = async (req: any, res: Response) => {
   try {
-    const { email, password, role } = req.body;
+    const { fullName, email, password, role } = req.body;
 
-    if (!email || !password) {
-      return res.status(400).json({ message: "Email and password are required" });
+    if (!fullName || !email || !password) {
+      return res.status(400).json({ message: "Full Name, Email and Password are required" });
     }
 
     const existingUser = await UserModel.findOne({ email });
@@ -19,6 +19,7 @@ export const createUser = async (req: any, res: Response) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const newUser = new UserModel({
+      fullName,
       email,
       password: hashedPassword,
       role: role || "user",
