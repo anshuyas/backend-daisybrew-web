@@ -109,7 +109,7 @@ export const getUserOrders = async (req: any, res: Response) => {
 // UPDATE USER
 export const updateUser = async (req: any, res: Response) => {
   try {
-    const { email, password, role } = req.body;
+    const { email, fullName, password, role } = req.body;
     const user = await UserModel.findById(req.params.id);
 
     if (!user) {
@@ -117,6 +117,7 @@ export const updateUser = async (req: any, res: Response) => {
     }
 
     if (email) user.email = email;
+    if (fullName) user.fullName = fullName;
     if (role) user.role = role;
     if (password) {
       user.password = await bcrypt.hash(password, 10);
