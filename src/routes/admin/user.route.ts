@@ -1,6 +1,6 @@
 import express from "express";
 import { uploads } from "../../middlewares/upload.middleware";
-import { createUser, deleteUser, getAllUsers, getUserById, updateUser } from "../../controllers/admin/user.controller";
+import { createUser, deleteUser, getAllUsers, getUserById, updateUser, getUserOrders } from "../../controllers/admin/user.controller";
 import { authorized, isAdmin } from "../../middlewares/auth.middleware"; // corrected import
 
 const router = express.Router();
@@ -13,6 +13,8 @@ router.get("/", authorized, isAdmin, getAllUsers);
 
 // GET /api/admin/users/:id
 router.get("/:id", authorized, isAdmin, getUserById);
+
+router.get("/:id/orders", getUserOrders);
 
 // PUT /api/admin/users/:id (update user with image)
 router.put("/:id", authorized, isAdmin, uploads.single("image"), updateUser);

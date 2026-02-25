@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { UserModel } from "../../models/user.model";
 import bcrypt from "bcryptjs";
+import { OrderModel } from "../../models/order.model";
 
 // CREATE USER (Admin)
 export const createUser = async (req: any, res: Response) => {
@@ -88,6 +89,20 @@ export const getUserById = async (req: any, res: Response) => {
     res.json(user);
   } catch (error) {
     res.status(500).json({ message: "Server error" });
+  }
+};
+
+// Get orders of a specific user
+export const getUserOrders = async (req: any, res: Response) => {
+  try {
+    const userId = req.params.id;
+
+    const orders = await OrderModel.find({ user: userId }).sort({ createdAt: -1 });
+
+    res.json(orders);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Failed to fetch orders" });
   }
 };
 
