@@ -3,12 +3,20 @@ import { CreateOrderDto, UpdateOrderStatusDto } from "../dtos/order.dto";
 
 export class OrderRepository {
   // Create a new order
-  static create(userId: string, data: CreateOrderDto) {
-    return OrderModel.create({
+  static async create(userId: string, data: CreateOrderDto) {
+    const order = new OrderModel({
       user: userId,
-      ...data,
+      items: data.items,
+      total: data.total,
+      deliveryOption: data.deliveryOption,
+      timeOption: data.timeOption,
       scheduledTime: data.scheduledTime ? new Date(data.scheduledTime) : null,
+      paymentMethod: data.paymentMethod,
+      customerDetails: data.customerDetails,
+      status: "confirmed", 
     });
+
+    return await order.save(); 
   }
 
   // Get orders for a specific user
@@ -32,6 +40,7 @@ export class OrderRepository {
   static async updateStatus(orderId: string, status: UpdateOrderStatusDto["status"]) {
     const order = await OrderModel.findById(orderId);
     if (!order) throw new Error("Order not found");
+
     order.status = status;
     return order.save();
   }
