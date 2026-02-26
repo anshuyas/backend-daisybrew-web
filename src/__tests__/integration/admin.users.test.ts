@@ -17,6 +17,7 @@ describe('Admin Users Integration Tests', () => {
       email: 'admin@example.com',
       password: hashedPassword,
       role: 'admin',
+      fullName: 'Admin Here',
     });
   }
   
@@ -64,6 +65,7 @@ describe('GET /api/admin/users/:id', () => {
         email: 'user@example.com',
         password: hashedPassword,
         role: 'user',
+        fullName: 'User',
       });
     }
   });
@@ -115,6 +117,7 @@ describe('POST /api/admin/users', () => {
     email: 'newuser@example.com',
     password: 'password123',
     role: 'user',
+    fullName: 'New User',
   };
 
    beforeAll(async () => {
@@ -161,6 +164,7 @@ describe('PUT /api/admin/users/:id', () => {
       email: 'updateuser@example.com',
       password: await bcrypt.hash('password123', 10),
       role: 'user',
+      fullName: 'Update User',
     });
     userIdToUpdate = user._id.toString();
   });
@@ -234,6 +238,7 @@ describe('DELETE /api/admin/users/:id', () => {
       email: 'deleteuser@example.com',
       password: await bcrypt.hash('password123', 10),
       role: 'user',
+      fullName: 'Delete User',
     });
     userIdToDelete = user._id.toString();
   });
@@ -297,6 +302,7 @@ describe('Admin Users Auth & Role Edge Cases', () => {
         email: 'user@example.com',
         password: hashedPassword,
         role: 'user',
+        fullName: 'User',
       });
     }
 

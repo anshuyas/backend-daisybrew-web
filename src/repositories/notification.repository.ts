@@ -9,7 +9,7 @@ export class NotificationRepository {
 
   // Mark notification as read
   static markAsRead(notificationId: string) {
-    return NotificationModel.findByIdAndUpdate(notificationId, { read: true });
+    return NotificationModel.findByIdAndUpdate(notificationId, { read: true }, { new: true });
   }
 
   // Create new notification

@@ -8,6 +8,7 @@ describe('Auth Password Integration Tests', () => {
     email: 'reset@test.com',
     password: 'Password123!',
     role: 'user',
+    fullName: 'Reset Test User',
   };
 
   let resetToken: string;
@@ -21,6 +22,7 @@ describe('Auth Password Integration Tests', () => {
       email: testUser.email,
       password: hashedPassword,
       role: testUser.role,
+      fullName: 'Test Reset User',
     });
   });
 

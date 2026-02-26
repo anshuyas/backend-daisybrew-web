@@ -17,6 +17,6 @@ export class UserRepository {
   return UserModel.findOne({
     resetPasswordToken: token,
     resetPasswordExpires: { $gt: new Date() },
-  }).select('+password');
+  }).select('+password +resetPasswordToken +resetPasswordExpires');
 }
 }
