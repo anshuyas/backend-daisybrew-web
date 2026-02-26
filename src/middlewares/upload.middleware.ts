@@ -20,7 +20,7 @@ const storage = multer.diskStorage({
     }
 });
 
-const fileFilter = (req: Request, file: Express.Multer.File, cb: multer.FileFilterCallback) => {
+export const fileFilter = (req: Request, file: Express.Multer.File, cb: multer.FileFilterCallback) => {
     if (file.mimetype.startsWith('image')) {
         cb(null, true);
     } else {
