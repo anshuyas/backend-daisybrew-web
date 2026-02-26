@@ -1,13 +1,14 @@
 import { Request, Response } from "express";
-import MenuModel, { IMenuItem } from "../../models/menu.model";
-import { uploads } from "../../middlewares/upload.middleware";
+import { MenuService } from "../../services/menu.service";
+import { CreateMenuItemDto, UpdateMenuItemDto } from "../../dtos/menu.dto";
 
 // GET /admin/menu
-export const getAllMenu = async (req: Request, res: Response) => {
+export const getAllMenu = async (_req: Request, res: Response) => {
   try {
-    const menuItems = await MenuModel.find();
+    const menuItems = await MenuService.getAllMenu();
     res.json({ success: true, data: menuItems });
   } catch (err) {
+    console.error(err);
     res.status(500).json({ success: false, message: "Failed to fetch menu" });
   }
 };
@@ -18,7 +19,9 @@ export const createMenuItem = async (req: Request, res: Response) => {
     const { name, price, category } = req.body;
     const image = req.file ? `/uploads/${req.file.filename}` : "";
 
-    const menuItem = await MenuModel.create({ name, price, category, image });
+    const dto: CreateMenuItemDto = { name, price, category, image };
+    const menuItem = await MenuService.createMenuItem(dto);
+
     res.json({ success: true, data: menuItem });
   } catch (err) {
     console.error(err);
@@ -31,13 +34,13 @@ export const updateMenuItem = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const { name, price, category } = req.body;
-    const updateData: Partial<IMenuItem> = { name, price, category };
+    const updateData: UpdateMenuItemDto = { name, price, category };
 
-    if (req.file) {
-      updateData.image = `/uploads/${req.file.filename}`;
-    }
+    if (req.file) updateData.image = `/uploads/${req.file.filename}`;
 
-    const updated = await MenuModel.findByIdAndUpdate(id, updateData, { new: true });
+    const updated = await MenuService.updateMenuItem(id, updateData);
+    if (!updated) return res.status(404).json({ success: false, message: "Menu item not found" });
+
     res.json({ success: true, data: updated });
   } catch (err) {
     console.error(err);
@@ -49,39 +52,26 @@ export const updateMenuItem = async (req: Request, res: Response) => {
 export const deleteMenuItem = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    await MenuModel.findByIdAndDelete(id);
+    await MenuService.deleteMenuItem(id);
     res.json({ success: true, message: "Menu item deleted" });
   } catch (err) {
+    console.error(err);
     res.status(500).json({ success: false, message: "Failed to delete menu item" });
   }
 };
 
+// PATCH /admin/menu/:id/availability
 export const toggleAvailability = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const { isAvailable } = req.body;
 
-    const item = await MenuModel.findByIdAndUpdate(
-      id,
-      { isAvailable },
-      { new: true }
-    );
-
-     if (!item) return res.status(404).json({ success: false, message: "Menu item not found" });
+    const item = await MenuService.toggleAvailability(id, isAvailable);
+    if (!item) return res.status(404).json({ success: false, message: "Menu item not found" });
 
     res.json({ success: true, data: item });
   } catch (err) {
     console.error(err);
     res.status(500).json({ success: false, message: "Failed to toggle availability" });
-  }
-};
-
-export const getMenuForUsers = async (req: Request, res: Response) => {
-  try {
-    const menuItems = await MenuModel.find(); 
-    res.json({ success: true, data: menuItems });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ success: false, message: "Failed to fetch menu" });
   }
 };

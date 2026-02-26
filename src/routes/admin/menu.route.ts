@@ -5,7 +5,6 @@ import {
   updateMenuItem,
   deleteMenuItem,
   toggleAvailability,
-  getMenuForUsers,
 } from "../../controllers/admin/menu.controller";
 import { authorized, isAdmin } from "../../middlewares/auth.middleware";
 import { uploads } from "../../middlewares/upload.middleware";

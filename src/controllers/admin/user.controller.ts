@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { UserModel } from "../../models/user.model";
 import bcrypt from "bcryptjs";
 import { OrderModel } from "../../models/order.model";
+import { OrderService } from "../../services/order.service";
 
 // CREATE USER (Admin)
 export const createUser = async (req: any, res: Response) => {
@@ -97,7 +98,7 @@ export const getUserOrders = async (req: any, res: Response) => {
   try {
     const userId = req.params.id;
 
-    const orders = await OrderModel.find({ user: userId }).sort({ createdAt: -1 });
+    const orders = await OrderService.getUserOrders(userId);
 
     res.json(orders);
   } catch (err) {
