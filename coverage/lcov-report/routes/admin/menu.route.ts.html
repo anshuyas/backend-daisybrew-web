@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>12/12</span>
+                <span class='fraction'>0/12</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>12/12</span>
+                <span class='fraction'>0/12</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -95,70 +95,70 @@
 <a name='L30'></a><a href='#L30'>30</a>
 <a name='L31'></a><a href='#L31'>31</a>
 <a name='L32'></a><a href='#L32'>32</a>
-<a name='L33'></a><a href='#L33'>33</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">9x</span>
-<span class="cline-any cline-yes">9x</span>
+<a name='L33'></a><a href='#L33'>33</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">9x</span>
-<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">9x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">9x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import express from "express";
-import {
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >import express from "express";</span>
+<span class="cstat-no" title="statement not covered" >import {</span>
   getAllMenu,
   createMenuItem,
   updateMenuItem,
   deleteMenuItem,
   toggleAvailability,
 } from "../../controllers/admin/menu.controller";
-import { authorized, isAdmin } from "../../middlewares/auth.middleware";
-import { uploads } from "../../middlewares/upload.middleware";
+<span class="cstat-no" title="statement not covered" >import { authorized, isAdmin } from "../../middlewares/auth.middleware";</span>
+<span class="cstat-no" title="statement not covered" >import { uploads } from "../../middlewares/upload.middleware";</span>
 &nbsp;
-const router = express.Router();
+const router = <span class="cstat-no" title="statement not covered" >express.Router();</span>
 &nbsp;
 // All routes protected by admin auth
-router.use(authorized, isAdmin);
+<span class="cstat-no" title="statement not covered" >router.use(authorized, isAdmin);</span>
 &nbsp;
 // GET all
-router.get("/", getAllMenu);
+<span class="cstat-no" title="statement not covered" >router.get("/", getAllMenu);</span>
 &nbsp;
 // POST new menu item (image upload)
-router.post("/", uploads.single("image"), createMenuItem);
+<span class="cstat-no" title="statement not covered" >router.post("/", uploads.single("image"), createMenuItem);</span>
 &nbsp;
 // PUT update menu item (image optional)
-router.put("/:id", uploads.single("image"), updateMenuItem);
+<span class="cstat-no" title="statement not covered" >router.put("/:id", uploads.single("image"), updateMenuItem);</span>
 &nbsp;
 // DELETE menu item
-router.delete("/:id", deleteMenuItem);
+<span class="cstat-no" title="statement not covered" >router.delete("/:id", deleteMenuItem);</span>
 &nbsp;
 // For toggle
-router.patch("/:id/availability", toggleAvailability);
+<span class="cstat-no" title="statement not covered" >router.patch("/:id/availability", toggleAvailability);</span>
 &nbsp;
-export default router;
+<span class="cstat-no" title="statement not covered" >export default router;</span>
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -166,7 +166,7 @@ export default router;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-02-27T07:47:30.564Z
+                at 2026-02-27T09:40:08.521Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

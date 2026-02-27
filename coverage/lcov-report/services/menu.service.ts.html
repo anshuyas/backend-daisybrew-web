@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>8/8</span>
+                <span class='fraction'>0/8</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>6/6</span>
+                <span class='fraction'>0/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>8/8</span>
+                <span class='fraction'>0/8</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -91,61 +91,61 @@
 <a name='L26'></a><a href='#L26'>26</a>
 <a name='L27'></a><a href='#L27'>27</a>
 <a name='L28'></a><a href='#L28'>28</a>
-<a name='L29'></a><a href='#L29'>29</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">10x</span>
+<a name='L29'></a><a href='#L29'>29</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { MenuRepository } from "../repositories/menu.repository";
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >import { MenuRepository } from "../repositories/menu.repository";</span>
 import { CreateMenuItemDto, UpdateMenuItemDto } from "../dtos/menu.dto";
 import { IMenuItem } from "../models/menu.model";
 &nbsp;
-export class MenuService {
-  static getAllMenu(): Promise&lt;IMenuItem[]&gt; {
-    return MenuRepository.getAll();
+<span class="cstat-no" title="statement not covered" >export class M</span>enuService {
+<span class="fstat-no" title="function not covered" >  static </span>getAllMenu(): Promise&lt;IMenuItem[]&gt; {
+<span class="cstat-no" title="statement not covered" >    return MenuRepository.getAll();</span>
   }
 &nbsp;
-  static getMenuForUsers(): Promise&lt;IMenuItem[]&gt; {
-    return MenuRepository.getMenuForUsers();
+<span class="fstat-no" title="function not covered" >  static </span>getMenuForUsers(): Promise&lt;IMenuItem[]&gt; {
+<span class="cstat-no" title="statement not covered" >    return MenuRepository.getMenuForUsers();</span>
   }
 &nbsp;
-  static createMenuItem(data: CreateMenuItemDto): Promise&lt;IMenuItem&gt; {
-    return MenuRepository.create(data);
+<span class="fstat-no" title="function not covered" >  static </span>createMenuItem(data: CreateMenuItemDto): Promise&lt;IMenuItem&gt; {
+<span class="cstat-no" title="statement not covered" >    return MenuRepository.create(data);</span>
   }
 &nbsp;
-  static updateMenuItem(id: string, data: UpdateMenuItemDto): Promise&lt;IMenuItem | null&gt; {
-    return MenuRepository.update(id, data);
+<span class="fstat-no" title="function not covered" >  static </span>updateMenuItem(id: string, data: UpdateMenuItemDto): Promise&lt;IMenuItem | null&gt; {
+<span class="cstat-no" title="statement not covered" >    return MenuRepository.update(id, data);</span>
   }
 &nbsp;
-  static deleteMenuItem(id: string): Promise&lt;void&gt; {
-    return MenuRepository.delete(id);
+<span class="fstat-no" title="function not covered" >  static </span>deleteMenuItem(id: string): Promise&lt;void&gt; {
+<span class="cstat-no" title="statement not covered" >    return MenuRepository.delete(id);</span>
   }
 &nbsp;
-  static toggleAvailability(id: string, isAvailable: boolean): Promise&lt;IMenuItem | null&gt; {
-    return MenuRepository.toggleAvailability(id, isAvailable);
+<span class="fstat-no" title="function not covered" >  static </span>toggleAvailability(id: string, isAvailable: boolean): Promise&lt;IMenuItem | null&gt; {
+<span class="cstat-no" title="statement not covered" >    return MenuRepository.toggleAvailability(id, isAvailable);</span>
   }
 }</pre></td></tr></table></pre>
 
@@ -154,7 +154,7 @@ export class MenuService {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-02-27T07:47:30.564Z
+                at 2026-02-27T09:40:08.521Z
             </div>
         <script src="../prettify.js"></script>
         <script>
