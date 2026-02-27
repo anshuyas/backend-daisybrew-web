@@ -89,4 +89,18 @@ describe('UserRepository Unit Tests', () => {
       expect(user).toBeNull();
     });
   });
+
+  describe('getUserById()', () => {
+  it('should return user by ID', async () => {
+    const user = await UserModel.findOne({ email: testUser.email });
+    const foundUser = await userRepo.getUserById(user!._id.toString());
+    expect(foundUser).not.toBeNull();
+    expect(foundUser?.email).toBe(testUser.email);
+  });
+
+  it('should return null if user does not exist', async () => {
+    const foundUser = await userRepo.getUserById('507f1f77bcf86cd799439011');
+    expect(foundUser).toBeNull();
+  });
+});
 });

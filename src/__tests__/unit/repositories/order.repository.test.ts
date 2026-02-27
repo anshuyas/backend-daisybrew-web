@@ -17,20 +17,28 @@ describe('OrderRepository Unit Tests', () => {
   const testOrder: CreateOrderDto = {
     items: [{ name: 'Cappuccino', quantity: 2, price: 5 }],
     total: 10,
-    deliveryOption: "delivery", 
-    timeOption: "asap",          
-    scheduledTime: null,
-    paymentMethod: "cod",
+    deliveryOption: 'delivery',
+    timeOption: 'asap',
+    scheduledTime: new Date('2026-03-01T10:00:00Z'), 
+    paymentMethod: 'cod',
     customerDetails: { fullName: 'Order User', phone: '1234567890' },
   };
 
+  // Create user once before all tests
   beforeAll(async () => {
     await UserModel.deleteMany({ email: testUser.email });
     const user = await UserModel.create(testUser);
     userId = user._id.toString();
-    await OrderModel.deleteMany({ user: userId });
   });
 
+  // Clear orders and create a fresh order before each test
+  beforeEach(async () => {
+    await OrderModel.deleteMany({ user: userId });
+    const order = await OrderRepository.create(userId, testOrder);
+    orderId = order._id.toString();
+  });
+
+  // Clean up after all tests
   afterAll(async () => {
     await OrderModel.deleteMany({ user: userId });
     await UserModel.deleteMany({ email: testUser.email });
@@ -42,7 +50,6 @@ describe('OrderRepository Unit Tests', () => {
       expect(order).toBeDefined();
       expect(order.user.toString()).toBe(userId);
       expect(order.items.length).toBe(1);
-      orderId = order._id.toString();
     });
   });
 
@@ -87,7 +94,8 @@ describe('OrderRepository Unit Tests', () => {
     });
 
     it('should throw error if order not found', async () => {
-      await expect(OrderRepository.updateStatus('507f1f77bcf86cd799439011', 'delivered')).rejects.toThrow('Order not found');
+      await expect(OrderRepository.updateStatus('507f1f77bcf86cd799439011', 'delivered'))
+        .rejects.toThrow('Order not found');
     });
   });
 });

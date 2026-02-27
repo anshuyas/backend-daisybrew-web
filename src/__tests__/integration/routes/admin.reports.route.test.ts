@@ -56,7 +56,10 @@ describe("Admin Reports Routes Integration Tests", () => {
   afterAll(async () => {
     await UserModel.deleteMany({});
     await OrderModel.deleteMany({});
+    jest.restoreAllMocks();
   });
+
+  /**  SUCCESS PATH TESTS  */
 
   it("GET /orders-over-time - should return aggregated orders", async () => {
     const res = await request(app)
@@ -85,5 +88,40 @@ describe("Admin Reports Routes Integration Tests", () => {
     expect(res.body).toHaveProperty("totalRevenue");
     expect(res.body).toHaveProperty("averageOrder");
     expect(res.body).toHaveProperty("totalOrders");
+  });
+
+  /**  ERROR PATH TESTS  */
+
+  it("GET /orders-over-time - should hit catch block on error", async () => {
+    jest.spyOn(OrderModel, "aggregate").mockRejectedValueOnce(new Error("DB fail"));
+
+    const res = await request(app)
+      .get("/api/admin/reports/orders-over-time")
+      .set("Authorization", `Bearer ${adminToken}`);
+
+    expect(res.status).toBe(500);
+    expect(res.body).toEqual({ message: "Failed to fetch orders over time" });
+  });
+
+  it("GET /top-drinks - should hit catch block on error", async () => {
+    jest.spyOn(OrderModel, "aggregate").mockRejectedValueOnce(new Error("DB fail"));
+
+    const res = await request(app)
+      .get("/api/admin/reports/top-drinks")
+      .set("Authorization", `Bearer ${adminToken}`);
+
+    expect(res.status).toBe(500);
+    expect(res.body).toEqual({ message: "Failed to fetch top drinks" });
+  });
+
+  it("GET /revenue - should hit catch block on error", async () => {
+    jest.spyOn(OrderModel, "aggregate").mockRejectedValueOnce(new Error("DB fail"));
+
+    const res = await request(app)
+      .get("/api/admin/reports/revenue")
+      .set("Authorization", `Bearer ${adminToken}`);
+
+    expect(res.status).toBe(500);
+    expect(res.body).toEqual({ message: "Failed to fetch revenue data" });
   });
 });

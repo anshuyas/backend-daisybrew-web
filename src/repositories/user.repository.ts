@@ -1,9 +1,9 @@
 import { IUser, UserModel } from "../models/user.model";
 
 export class UserRepository {
-  getUserById(id: any) {
-      throw new Error('Method not implemented.');
-  }
+  async getUserById(id: string) {
+  return UserModel.findById(id);
+}
   
   async createUser(user: Partial<IUser>) {
     return UserModel.create(user);

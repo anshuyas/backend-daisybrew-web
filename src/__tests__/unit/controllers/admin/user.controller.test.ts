@@ -23,6 +23,17 @@ describe("Admin User Controller", () => {
 
   //  createUser 
   describe("createUser", () => {
+    it("should return 400 if missing required fields", async () => {
+  req.body = { email: "test@test.com" }; 
+  await createUser(req, res);
+
+  expect(statusMock).toHaveBeenCalledWith(400);
+  expect(jsonMock).toHaveBeenCalledWith(expect.objectContaining({
+    success: false,
+    message: "Full Name, Email and Password are required",
+  }));
+});
+
     it("should create user successfully", async () => {
       req.body = { fullName: "Test", email: "test@test.com", password: "123", role: "user" };
       (UserModel.findOne as jest.Mock).mockResolvedValue(null);
@@ -135,13 +146,33 @@ const hashSpy = jest
 
   //  updateUser 
   describe("updateUser", () => {
+    it("should return 404 if user not found", async () => {
+  (UserModel.findById as jest.Mock).mockResolvedValue(null);
+  await updateUser(req, res);
+
+  expect(statusMock).toHaveBeenCalledWith(404);
+  expect(jsonMock).toHaveBeenCalledWith({
+    success: false,
+    message: "User not found",
+  });
+});
+
     it("should update user successfully", async () => {
       const saveMock = jest.fn().mockResolvedValue(true);
-      (UserModel.findById as jest.Mock).mockResolvedValue({ save: saveMock, _id: "user1", fullName: "Old", email: "old@test.com" });
+      (UserModel.findById as jest.Mock).mockResolvedValue({ 
+        save: saveMock, 
+        _id: "user1", 
+        fullName: "Old", 
+        email: "old@test.com",
+      role: "user",
+     });
       req.body = { fullName: "New" };
       await updateUser(req, res);
       expect(statusMock).toHaveBeenCalledWith(200);
-      expect(jsonMock).toHaveBeenCalledWith(expect.objectContaining({ success: true }));
+      expect(jsonMock).toHaveBeenCalledWith(expect.objectContaining({ 
+        success: true,
+        data: expect.objectContaining({ _id: "user1" }),
+       }));
     });
 
     it("should return 404 if user not found", async () => {
@@ -160,11 +191,27 @@ const hashSpy = jest
 
   //  deleteUser 
   describe("deleteUser", () => {
-    it("should delete user successfully", async () => {
-      (UserModel.findByIdAndDelete as jest.Mock).mockResolvedValue(true);
-      await deleteUser(req, res);
-      expect(jsonMock).toHaveBeenCalledWith({ message: "User deleted successfully" });
+    it("should return 404 if user not found", async () => {
+  (UserModel.findByIdAndDelete as jest.Mock).mockResolvedValue(null);
+  await deleteUser(req, res);
+
+  expect(statusMock).toHaveBeenCalledWith(404);
+  expect(jsonMock).toHaveBeenCalledWith(expect.objectContaining({
+    message: "User not found",
+  }));
+});
+
+     it("should delete user successfully", async () => {
+    (UserModel.findByIdAndDelete as jest.Mock).mockResolvedValue({
+      _id: "user1",
     });
+
+    await deleteUser(req, res);
+
+    expect(jsonMock).toHaveBeenCalledWith({
+      message: "User deleted successfully",
+    });
+  });
 
     it("should return 404 if user not found", async () => {
       (UserModel.findByIdAndDelete as jest.Mock).mockResolvedValue(null);
