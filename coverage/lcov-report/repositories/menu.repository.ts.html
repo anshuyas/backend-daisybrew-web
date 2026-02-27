@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/8</span>
+                <span class='fraction'>8/8</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/7</span>
+                <span class='fraction'>7/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/8</span>
+                <span class='fraction'>8/8</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -90,59 +90,59 @@
 <a name='L25'></a><a href='#L25'>25</a>
 <a name='L26'></a><a href='#L26'>26</a>
 <a name='L27'></a><a href='#L27'>27</a>
-<a name='L28'></a><a href='#L28'>28</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<a name='L28'></a><a href='#L28'>28</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">17x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">17x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >import MenuModel, { IMenuItem } from "../models/menu.model";</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import MenuModel, { IMenuItem } from "../models/menu.model";
 import { CreateMenuItemDto, UpdateMenuItemDto } from "../dtos/menu.dto";
 &nbsp;
-<span class="cstat-no" title="statement not covered" >export class M</span>enuRepository {
-<span class="fstat-no" title="function not covered" >  static </span>getAll(): Promise&lt;IMenuItem[]&gt; {
-<span class="cstat-no" title="statement not covered" >    return MenuModel.find();</span>
+export class MenuRepository {
+  static getAll(): Promise&lt;IMenuItem[]&gt; {
+    return MenuModel.find();
   }
 &nbsp;
-<span class="fstat-no" title="function not covered" >  static </span>getMenuForUsers(): Promise&lt;IMenuItem[]&gt; {
-<span class="cstat-no" title="statement not covered" >    return MenuModel.find({ isAvailable: true });</span>
+  static getMenuForUsers(): Promise&lt;IMenuItem[]&gt; {
+    return MenuModel.find({ isAvailable: true });
   }
 &nbsp;
-<span class="fstat-no" title="function not covered" >  static </span>create(data: CreateMenuItemDto): Promise&lt;IMenuItem&gt; {
-<span class="cstat-no" title="statement not covered" >    return MenuModel.create(data);</span>
+  static create(data: CreateMenuItemDto): Promise&lt;IMenuItem&gt; {
+    return MenuModel.create(data);
   }
 &nbsp;
-<span class="fstat-no" title="function not covered" >  static </span>update(id: string, data: UpdateMenuItemDto): Promise&lt;IMenuItem | null&gt; {
-<span class="cstat-no" title="statement not covered" >    return MenuModel.findByIdAndUpdate(id, data, { new: true });</span>
+  static update(id: string, data: UpdateMenuItemDto): Promise&lt;IMenuItem | null&gt; {
+    return MenuModel.findByIdAndUpdate(id, data, { new: true });
   }
 &nbsp;
-<span class="fstat-no" title="function not covered" >  static </span>delete(id: string): Promise&lt;void&gt; {
-<span class="cstat-no" title="statement not covered" >    return MenuModel.findByIdAndDelete(id).then(<span class="fstat-no" title="function not covered" >() =</span>&gt; {});</span>
+  static delete(id: string): Promise&lt;void&gt; {
+    return MenuModel.findByIdAndDelete(id).then(() =&gt; {});
   }
 &nbsp;
-<span class="fstat-no" title="function not covered" >  static </span>toggleAvailability(id: string, isAvailable: boolean): Promise&lt;IMenuItem | null&gt; {
-<span class="cstat-no" title="statement not covered" >    return MenuModel.findByIdAndUpdate(id, { isAvailable }, { new: true });</span>
+  static toggleAvailability(id: string, isAvailable: boolean): Promise&lt;IMenuItem | null&gt; {
+    return MenuModel.findByIdAndUpdate(id, { isAvailable }, { new: true });
   }
 }</pre></td></tr></table></pre>
 
@@ -151,7 +151,7 @@ import { CreateMenuItemDto, UpdateMenuItemDto } from "../dtos/menu.dto";
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-02-27T09:40:08.521Z
+                at 2026-02-27T10:09:08.306Z
             </div>
         <script src="../prettify.js"></script>
         <script>

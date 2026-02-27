@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/20</span>
+                <span class='fraction'>20/20</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">75% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>3/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/18</span>
+                <span class='fraction'>18/18</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -98,72 +98,72 @@
 <a name='L33'></a><a href='#L33'>33</a>
 <a name='L34'></a><a href='#L34'>34</a>
 <a name='L35'></a><a href='#L35'>35</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">14x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">14x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">14x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Request, Response } from "express";
-<span class="cstat-no" title="statement not covered" >import { OrderService } from "../../services/order.service";</span>
+import { OrderService } from "../../services/order.service";
 import { CreateOrderDto, UpdateOrderStatusDto } from "../../dtos/order.dto";
 &nbsp;
 // GET /orders/admin (admin only)
-export const <span class="cstat-no" title="statement not covered" >getAllOrders = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >a</span>sync </span>(_req: any, res: Response) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >  try {</span>
-    const orders = <span class="cstat-no" title="statement not covered" >await OrderService.getAllOrders();</span>
-<span class="cstat-no" title="statement not covered" >    res.json(orders);</span>
+export const getAllOrders = async (_req: any, res: Response) =&gt; {
+  try {
+    const orders = await OrderService.getAllOrders();
+    res.json(orders);
   } catch (err: any) {
-<span class="cstat-no" title="statement not covered" >    console.error(err);</span>
-<span class="cstat-no" title="statement not covered" >    res.status(500).json({ message: "Failed to fetch orders" });</span>
+    console.error(err);
+    res.status(500).json({ message: "Failed to fetch orders" });
   }
 };
 &nbsp;
 // PUT /orders/:id/status (admin only)
-export const <span class="cstat-no" title="statement not covered" >updateOrderStatus = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >a</span>sync </span>(req: any, res: Response) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >  try {</span>
-    const dto: UpdateOrderStatusDto = <span class="cstat-no" title="statement not covered" >req.body;</span>
-    const order = <span class="cstat-no" title="statement not covered" >await OrderService.updateOrderStatus(req.params.id, dto);</span>
-<span class="cstat-no" title="statement not covered" >    res.json({ message: "Order status updated successfully", order });</span>
+export const updateOrderStatus = async (req: any, res: Response) =&gt; {
+  try {
+    const dto: UpdateOrderStatusDto = req.body;
+    const order = await OrderService.updateOrderStatus(req.params.id, dto);
+    res.json({ message: "Order status updated successfully", order });
   } catch (err: any) {
-<span class="cstat-no" title="statement not covered" >    console.error(err);</span>
+    console.error(err);
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (err.message === "Order not found") {</span>
-<span class="cstat-no" title="statement not covered" >      return res.status(404).json({ message: err.message });</span>
+    if (err.message === "Order not found") {
+      return res.status(404).json({ message: err.message });
     }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (err.message?.startsWith("Order is already")) {</span>
-<span class="cstat-no" title="statement not covered" >      return res.status(400).json({ message: err.message });</span>
+    if (err.message?.startsWith("Order is already")) {
+      return res.status(400).json({ message: err.message });
     }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    res.status(500).json({ message: err.message || "Failed to update order status" });</span>
+    res.status(500).json({ message: err.message || <span class="branch-1 cbranch-no" title="branch not covered" >"Failed to update order status" </span>});
   }
 };</pre></td></tr></table></pre>
 
@@ -172,7 +172,7 @@ export const <span class="cstat-no" title="statement not covered" >updateOrderSt
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-02-27T09:40:08.521Z
+                at 2026-02-27T10:09:08.306Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
