@@ -21,6 +21,15 @@ export const updateOrderStatus = async (req: any, res: Response) => {
     res.json({ message: "Order status updated successfully", order });
   } catch (err: any) {
     console.error(err);
+
+    if (err.message === "Order not found") {
+      return res.status(404).json({ message: err.message });
+    }
+
+    if (err.message?.startsWith("Order is already")) {
+      return res.status(400).json({ message: err.message });
+    }
+
     res.status(500).json({ message: err.message || "Failed to update order status" });
   }
 };

@@ -126,17 +126,18 @@ describe('POST /api/admin/users', () => {
   });
 
   it('should create a new user (admin only)', async () => {
-    const res = await request(app)
-      .post('/api/admin/users')
-      .set('Authorization', `Bearer ${adminToken}`)
-      .send(newUserData);
+  const res = await request(app)
+    .post('/api/admin/users')
+    .set('Authorization', `Bearer ${adminToken}`)
+    .send(newUserData);
 
-    console.log('CREATE USER RESPONSE:', res.body);
-
-    expect(res.status).toBe(201);
-    expect(res.body).toHaveProperty('message', 'User created successfully');
-    expect(res.body.user).toHaveProperty('email', newUserData.email);
-  });
+  expect(res.status).toBe(201);
+  // updated to match controller
+  expect(res.body.success).toBe(true);
+  expect(res.body.data).toHaveProperty('email', newUserData.email);
+  expect(res.body.data).toHaveProperty('fullName', newUserData.fullName);
+  expect(res.body.data).toHaveProperty('role', newUserData.role);
+});
 
   it('should fail if email already exists', async () => {
     const res = await request(app)
@@ -170,22 +171,22 @@ describe('PUT /api/admin/users/:id', () => {
   });
 
   it('should update user email and role (admin only)', async () => {
-    const updateData = {
-      email: 'updateduser@example.com',
-      role: 'admin',
-    };
+  const updateData = {
+    email: 'updateduser@example.com',
+    role: 'admin',
+  };
 
-    const res = await request(app)
-      .put(`/api/admin/users/${userIdToUpdate}`)
-      .set('Authorization', `Bearer ${adminToken}`)
-      .send(updateData);
+  const res = await request(app)
+    .put(`/api/admin/users/${userIdToUpdate}`)
+    .set('Authorization', `Bearer ${adminToken}`)
+    .send(updateData);
 
-    console.log('UPDATE USER RESPONSE:', res.body);
-
-    expect(res.status).toBe(200);
-    expect(res.body.user).toHaveProperty('email', updateData.email);
-    expect(res.body.user).toHaveProperty('role', updateData.role);
-  });
+  expect(res.status).toBe(200);
+  // updated to match controller
+  expect(res.body.success).toBe(true);
+  expect(res.body.data).toHaveProperty('email', updateData.email);
+  expect(res.body.data).toHaveProperty('role', updateData.role);
+});
 
   it('should fail when updating a non-existing user', async () => {
     const fakeId = '507f1f77bcf86cd799439012'; // random MongoDB ObjectId

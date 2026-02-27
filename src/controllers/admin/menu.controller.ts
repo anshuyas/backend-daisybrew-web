@@ -16,25 +16,32 @@ export const getAllMenu = async (_req: Request, res: Response) => {
 // POST /admin/menu
 export const createMenuItem = async (req: Request, res: Response) => {
   try {
-    const { name, price, category } = req.body;
+    const { name, category } = req.body;
+    const price = Number(req.body.price);
     const image = req.file ? `/uploads/${req.file.filename}` : "";
 
     const dto: CreateMenuItemDto = { name, price, category, image };
     const menuItem = await MenuService.createMenuItem(dto);
 
     res.json({ success: true, data: menuItem });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ success: false, message: "Failed to create menu item" });
-  }
+  } catch (err: any) {
+  console.error("CREATE MENU ERROR:", err);
+  res.status(500).json({ 
+    success: false, 
+    message: err.message || "Failed to create menu item" 
+  });
+}
 };
 
 // PUT /admin/menu/:id
 export const updateMenuItem = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const { name, price, category } = req.body;
-    const updateData: UpdateMenuItemDto = { name, price, category };
+    const { name, category } = req.body;
+    const updateData: UpdateMenuItemDto = { name, category };
+    if (req.body.price !== undefined) {
+  updateData.price = Number(req.body.price);
+}
 
     if (req.file) updateData.image = `/uploads/${req.file.filename}`;
 

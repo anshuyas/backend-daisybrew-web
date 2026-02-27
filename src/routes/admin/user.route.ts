@@ -14,7 +14,7 @@ router.get("/", authorized, isAdmin, getAllUsers);
 // GET /api/admin/users/:id
 router.get("/:id", authorized, isAdmin, getUserById);
 
-router.get("/:id/orders", getUserOrders);
+router.get("/:id/orders", authorized, isAdmin, getUserOrders);
 
 // PUT /api/admin/users/:id (update user with image)
 router.put("/:id", authorized, isAdmin, uploads.single("image"), updateUser);
