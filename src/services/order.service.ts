@@ -9,6 +9,7 @@ export class OrderService {
     // Create order
     const order = await OrderRepository.create(userId, data);
     const shortId = order._id.toString().slice(-6);
+    const user = await UserModel.findById(userId).select("fullName email");
 
     // Notify user
     await NotificationModel.create({
@@ -21,7 +22,7 @@ export class OrderService {
     for (const admin of admins) {
       await NotificationModel.create({
         user: admin._id,
-        message: `New order #${shortId} placed by ${userId}`,
+        message: `New order #${shortId} placed by ${user?.fullName || user?.email || "a user"}`,
       });
     }
 

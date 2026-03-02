@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1772222694884" clover="3.2.0">
-  <project timestamp="1772222694884" name="All files">
-    <metrics statements="581" coveredstatements="566" conditionals="84" coveredconditionals="76" methods="90" coveredmethods="87" elements="755" coveredelements="729" complexity="0" loc="581" ncloc="581" packages="13" files="40" classes="40"/>
+<coverage generated="1772434206004" clover="3.2.0">
+  <project timestamp="1772434206005" name="All files">
+    <metrics statements="582" coveredstatements="567" conditionals="87" coveredconditionals="77" methods="90" coveredmethods="87" elements="759" coveredelements="731" complexity="0" loc="582" ncloc="582" packages="13" files="40" classes="40"/>
     <package name="config">
       <metrics statements="11" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
       <file name="email.ts" path="D:\Uni\Sem5\backend-daisybrew\src\config\email.ts">
@@ -644,7 +644,7 @@
       </file>
     </package>
     <package name="services">
-      <metrics statements="75" coveredstatements="75" conditionals="8" coveredconditionals="8" methods="17" coveredmethods="17"/>
+      <metrics statements="76" coveredstatements="76" conditionals="11" coveredconditionals="9" methods="17" coveredmethods="17"/>
       <file name="menu.service.ts" path="D:\Uni\Sem5\backend-daisybrew\src\services\menu.service.ts">
         <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="6"/>
         <line num="1" count="16" type="stmt"/>
@@ -665,32 +665,33 @@
         <line num="14" count="1" type="stmt"/>
       </file>
       <file name="order.service.ts" path="D:\Uni\Sem5\backend-daisybrew\src\services\order.service.ts">
-        <metrics statements="25" coveredstatements="25" conditionals="3" coveredconditionals="3" methods="4" coveredmethods="4"/>
+        <metrics statements="26" coveredstatements="26" conditionals="6" coveredconditionals="4" methods="4" coveredmethods="4"/>
         <line num="1" count="17" type="stmt"/>
         <line num="2" count="17" type="stmt"/>
         <line num="3" count="17" type="stmt"/>
         <line num="6" count="17" type="stmt"/>
         <line num="10" count="2" type="stmt"/>
         <line num="11" count="2" type="stmt"/>
-        <line num="14" count="2" type="stmt"/>
-        <line num="20" count="2" type="stmt"/>
+        <line num="12" count="2" type="stmt"/>
+        <line num="15" count="2" type="stmt"/>
         <line num="21" count="2" type="stmt"/>
-        <line num="22" count="1" type="stmt"/>
-        <line num="28" count="2" type="stmt"/>
-        <line num="33" count="3" type="stmt"/>
-        <line num="38" count="2" type="stmt"/>
-        <line num="43" count="6" type="stmt"/>
-        <line num="44" count="6" type="cond" truecount="1" falsecount="0"/>
-        <line num="45" count="3" type="cond" truecount="1" falsecount="0"/>
-        <line num="48" count="2" type="stmt"/>
+        <line num="22" count="2" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="29" count="2" type="stmt"/>
+        <line num="34" count="3" type="stmt"/>
+        <line num="39" count="2" type="stmt"/>
+        <line num="44" count="6" type="stmt"/>
+        <line num="45" count="6" type="cond" truecount="1" falsecount="0"/>
+        <line num="46" count="3" type="cond" truecount="1" falsecount="0"/>
         <line num="49" count="2" type="stmt"/>
-        <line num="52" count="2" type="cond" truecount="1" falsecount="0"/>
-        <line num="53" count="2" type="stmt"/>
-        <line num="60" count="2" type="stmt"/>
+        <line num="50" count="2" type="stmt"/>
+        <line num="53" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="54" count="2" type="stmt"/>
         <line num="61" count="2" type="stmt"/>
         <line num="62" count="2" type="stmt"/>
-        <line num="68" count="2" type="stmt"/>
+        <line num="63" count="2" type="stmt"/>
         <line num="69" count="2" type="stmt"/>
+        <line num="70" count="2" type="stmt"/>
       </file>
       <file name="user.service.ts" path="D:\Uni\Sem5\backend-daisybrew\src\services\user.service.ts">
         <metrics statements="37" coveredstatements="37" conditionals="5" coveredconditionals="5" methods="4" coveredmethods="4"/>

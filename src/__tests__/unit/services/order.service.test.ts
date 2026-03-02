@@ -27,27 +27,36 @@ describe('OrderService Unit Tests', () => {
   });
 
   it('createOrder should create order and send notifications', async () => {
-    const orderDto: CreateOrderDto = {
-      items: [],
-      total: 100,
-      deliveryOption: 'pickup',
-      timeOption: 'asap',
-      scheduledTime: null,
-      paymentMethod: 'cod',
-      customerDetails: {},
-    };
+  const orderDto: CreateOrderDto = {
+    items: [],
+    total: 100,
+    deliveryOption: 'pickup',
+    timeOption: 'asap',
+    scheduledTime: null,
+    paymentMethod: 'cod',
+    customerDetails: {},
+  };
 
-    // Mock repository
-    (OrderRepository.create as jest.Mock).mockResolvedValue(mockOrder);
-    (UserModel.find as jest.Mock).mockResolvedValue([{ _id: 'admin1' }]);
-    (NotificationModel.create as jest.Mock).mockResolvedValue({});
+  (OrderRepository.create as jest.Mock).mockResolvedValue(mockOrder);
 
-    const result = await OrderService.createOrder('user123', orderDto);
-
-    expect(OrderRepository.create).toHaveBeenCalledWith('user123', orderDto);
-    expect(NotificationModel.create).toHaveBeenCalledTimes(2); // 1 user + 1 admin
-    expect(result).toEqual(mockOrder);
+  // Mock the user who placed the order
+  (UserModel.findById as jest.Mock).mockReturnValue({
+    select: jest.fn().mockResolvedValue({ fullName: 'Test User', email: 'user@test.com' }),
   });
+
+  // Mock admins list
+  (UserModel.find as jest.Mock).mockResolvedValue([
+    { _id: 'admin1', fullName: 'Admin One', email: 'admin1@test.com' },
+  ]);
+
+  (NotificationModel.create as jest.Mock).mockResolvedValue({});
+
+  const result = await OrderService.createOrder('user123', orderDto);
+
+  expect(OrderRepository.create).toHaveBeenCalledWith('user123', orderDto);
+  expect(NotificationModel.create).toHaveBeenCalledTimes(2); // 1 user + 1 admin
+  expect(result).toEqual(mockOrder);
+});
 
   it('getUserOrders should call repository', async () => {
     (OrderRepository.getUserOrders as jest.Mock).mockResolvedValue([mockOrder]);
